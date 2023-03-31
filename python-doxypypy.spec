@@ -1,6 +1,6 @@
 Name: python-doxypypy
 Version: 0.8.8.6
-Release: 1
+Release: 2
 Source0: https://files.pythonhosted.org/packages/source/d/doxypypy/doxypypy-%{version}.tar.gz
 Summary: Doxygen filter for Python
 URL: https://pypi.org/project/doxypypy/
