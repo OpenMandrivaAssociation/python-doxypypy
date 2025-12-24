@@ -1,13 +1,18 @@
-Name: python-doxypypy
-Version: 0.8.8.7
-Release: 2
-Source0: https://files.pythonhosted.org/packages/source/d/doxypypy/doxypypy-%{version}.tar.gz
-Summary: Doxygen filter for Python
-URL: https://pypi.org/project/doxypypy/
-License: GPL
-Group: Development/Python
-BuildRequires:	python-setuptools
+%define module doxypypy
+
+Name:		python-doxypypy
+Version:	0.8.8.7
+Release:	2
+Summary:	Doxygen filter for Python
+License:	GPL
+Group:		Development/Python
+URL:		https://pypi.org/project/doxypypy/
+Source0:	https://files.pythonhosted.org/packages/source/d/%{module}/%{module}-%{version}.tar.gz
+BuildSystem:	python
 BuildArch: noarch
+BuildRequires:	python%{pyver}dist(pip)
+BuildRequires:	python%{pyver}dist(setuptools)
+BuildRequires:	python%{pyver}dist(wheel)
 
 %description
 For now Doxygen has limited support for Python. It recognizes Python comments,
@@ -32,15 +37,14 @@ all the same command line options as doxypy, but handle additional
 Python syntax beyond docstrings.
 
 %prep
-%autosetup -p1 -n doxypypy-%{version}
+%autosetup -p1 -n %{module}-%{version}
+# Remove bundled egg-info
+rm -rf %{oname}.egg-info
 
-%build
-python setup.py build
-
-%install
-python setup.py install --skip-build --root=%{buildroot}
 
 %files
+%doc README.rst
+%license LICENSE.txt
 %{_bindir}/doxypypy
-%{_prefix}/lib/python*/site-packages/doxypypy-*.egg-info
-%{_prefix}/lib/python*/site-packages/doxypypy
+%{python_sitelib}/%{module}
+%{python_sitelib}/%{module}-%{version}-*.*-info
